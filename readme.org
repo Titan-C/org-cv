@@ -1,0 +1,20 @@
+#+TITLE:  Org exporter for curriculum vitaes
+#+AUTHOR: Óscar Nájera
+#+EMAIL:  hello@oscarnajera.com
+#+DATE:   2018 Mar 22
+#+LATEX_HEADER: \usepackage[top=2cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
+#+LATEX_HEADER: \usepackage{indentfirst}
+#+LATEX_CLASS_OPTIONS: [a4paper,12pt]
+#+STARTUP: hideblocks
+#+OPTIONS: toc:nil num:nil
+# This is for syntax highlight
+#+LaTeX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \usemintedstyle{friendly}
+#+LaTeX_HEADER: \newminted{common-lisp}{fontsize=\footnotesize}
+
+This project aim on generating from an orgmode file with reasonably ordered
+items of live to export to a latex file which compiles into a reasonably
+nice CV.
+
+* TODO Base environment
+* TODO Tune in latex export
