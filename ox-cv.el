@@ -18,3 +18,6 @@
   :tag "Org moderncv"
   :group 'org-export
   :version "25.3")
+
+;;; Define Back-End
+(org-export-define-derived-backend 'orgcv 'latex)
