@@ -16,5 +16,11 @@ This project aim on generating from an orgmode file with reasonably ordered
 items of live to export to a latex file which compiles into a reasonably
 nice CV.
 
-* TODO Base environment
+* DONE Base environment
+- State "DONE"       from "TODO"       [2018-03-22 Thu 17:57]
+I have the basic cv template that gets exported
+* TODO org-exporter for latex
+:LOGBOOK:
+CLOCK: [2018-03-22 Thu 17:58]
+:END:
 * TODO Tune in latex export
