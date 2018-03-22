@@ -23,7 +23,11 @@
 (org-export-define-derived-backend 'orgcv 'latex
   :options-alist
   '((:mobile "MOBILE" nil nil parse)
-    (:homepage "HOMEPAGE" nil nil parse))
+    (:homepage "HOMEPAGE" nil nil parse)
+    (:gitlab "GITLAB" nil nil parse)
+    (:github "GITHUB" nil nil parse)
+    (:linkedin "LINKEDIN" nil nil parse)
+    )
   :translate-alist '((template . org-cv-template)))
 
 ;;;; Template
@@ -64,6 +68,15 @@ holding export options."
      ;; homepage
      (let ((homepage (org-export-data (plist-get info :homepage) info)))
        (when homepage (format "\\homepage{%s}\n" homepage)))
+     ;; github
+     (let ((github (org-export-data (plist-get info :github) info)))
+       (when github (format "\\social[github]{%s}\n" github)))
+     ;; gitlab
+     (let ((gitlab (org-export-data (plist-get info :gitlab) info)))
+       (when gitlab (format "\\social[gitlab]{%s}\n" gitlab)))
+     ;; linkedin
+     (let ((linkedin (org-export-data (plist-get info :linkedin) info)))
+       (when linkedin (format "\\social[linkedin]{%s}\n" linkedin)))
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
        (format "\\date{%s}\n" (org-export-data date info)))
