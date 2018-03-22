@@ -21,6 +21,9 @@
 
 ;;; Define Back-End
 (org-export-define-derived-backend 'orgcv 'latex
+  :options-alist
+  '((:mobile "MOBILE" nil nil parse)
+    (:homepage "HOMEPAGE" nil nil parse))
   :translate-alist '((template . org-cv-template)))
 
 ;;;; Template
@@ -51,12 +54,20 @@ holding export options."
 			(let ((auth (plist-get info :author)))
 			  (and auth (org-export-data auth info))))))
        (format "\\name{%s}{}\n" author))
+     ;; email
      (let ((email (and (plist-get info :with-email)
 		       (org-export-data (plist-get info :email) info))))
        (when email (format "\\email{%s}\n" email)))
+     ;; phone
+     (let ((mobile (org-export-data (plist-get info :mobile) info)))
+       (when mobile (format "\\phone[mobile]{%s}\n" mobile)))
+     ;; homepage
+     (let ((homepage (org-export-data (plist-get info :homepage) info)))
+       (when homepage (format "\\homepage{%s}\n" homepage)))
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
        (format "\\date{%s}\n" (org-export-data date info)))
+
      ;; Title and subtitle.
      (let* ((subtitle (plist-get info :subtitle))
 	    (formatted-subtitle
