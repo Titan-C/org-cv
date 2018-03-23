@@ -178,12 +178,10 @@ as a communication channel."
 
 	  (environment (let ((env (org-element-property :CV_ENV headline)))
 			 (or (org-string-nw-p env) "block"))))
-      (concat (format "%s %s %s %s" level tags frame-level environment)
-              ;; is a cv entry
-              "jumping"
-              (and (equal environment "cventry")
-                   (org-cv-cventry headline contents info))
-              "ahead\n\n"
-
-
-	      ))))
+      (cond
+       ;; is a cv entry
+       ((equal environment "cventry")
+        (org-cv-cventry headline contents info))
+       (t (concat (format "%s %s %s %s %s\n" level tags frame-level environment
+                          contents)
+                ))))))
