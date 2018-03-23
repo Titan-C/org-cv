@@ -32,7 +32,8 @@
     (:github "GITHUB" nil nil parse)
     (:linkedin "LINKEDIN" nil nil parse)
     )
-  :translate-alist '((template . org-cv-template)))
+  :translate-alist '((template . org-cv-template)
+		     (headline . org-cv-headline)))
 
 (defun org-cv--add-latex-newlines (string)
   "Replace regular newlines with LaTeX newlines (i.e. `\\\\')"
@@ -139,3 +140,35 @@ holding export options."
 	  (concat (plist-get info :creator) "\n"))
      ;; Document end.
      "\\end{document}")))
+
+(defun org-cv-cventry (headline contents info)
+  (let ((from-date (org-element-property :FROM headline))
+        (to-date (org-element-property :TO headline))
+        (location (org-element-property :LOCATION headline))
+        (title (org-element-property :title headline))
+        (employer (org-element-property :EMPLOYER headline)))
+    (format "\\cventry{%s}{%s}{%s}{%s}{%s}{%s}\n"
+            "start" title employer location "de paso" contents)))
+
+
+;;;; Headline
+(defun org-cv-headline (headline contents info)
+  "Transcode HEADLINE element into Beamer code.
+CONTENTS is the contents of the headline.  INFO is a plist used
+as a communication channel."
+  (unless (org-element-property :footnote-section-p headline)
+    (let ((level (org-export-get-relative-level headline info))
+	  (frame-level (org-beamer--frame-level headline info))
+          (tags (org-export-get-tags headline info))
+
+	  (environment (let ((env (org-element-property :CV_ENV headline)))
+			 (or (org-string-nw-p env) "block"))))
+      (concat (format "%s %s %s %s" level tags frame-level environment)
+              ;; is a cv entry
+              "jumping"
+              (and (equal environment "cventry")
+                   (org-cv-cventry headline contents info))
+              "ahead\n\n"
+
+
+	      ))))
