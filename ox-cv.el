@@ -22,7 +22,10 @@
 ;;; Define Back-End
 (org-export-define-derived-backend 'orgcv 'latex
   :options-alist
-  '((:mobile "MOBILE" nil nil parse)
+  '(
+    (:cvstyle "CVSTYLE" nil "classic" t)
+    (:cvcolor "CVCOLOR" nil "blue" t)
+    (:mobile "MOBILE" nil nil parse)
     (:homepage "HOMEPAGE" nil nil parse)
     (:address "ADDRESS" nil nil newline)
     (:gitlab "GITLAB" nil nil parse)
@@ -56,6 +59,12 @@ holding export options."
      ;;(org-latex--insert-compiler info)
      ;; Document class and packages.
      (org-latex-make-preamble info)
+     ;; cvstyle
+     (let ((cvstyle (org-export-data (plist-get info :cvstyle) info)))
+       (when cvstyle (format "\\moderncvstyle{%s}\n" cvstyle)))
+     ;; cvcolor
+     (let ((cvcolor (org-export-data (plist-get info :cvcolor) info)))
+       (when cvcolor (format "\\moderncvcolor{%s}\n" cvcolor)))
      ;; Possibly limit depth for headline numbering.
      (let ((sec-num (plist-get info :section-numbers)))
        (when (integerp sec-num)
