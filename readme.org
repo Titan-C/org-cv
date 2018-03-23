@@ -34,7 +34,13 @@ already reproduce latex export, which is not much as that was already a
 working output. But now I have the specific keywords for the personal
 information part.
 ** TODO Process headings with properties into cventries
-** TODO Incorporate from beamer how the do the theme settings
+:LOGBOOK:
+CLOCK: [2018-03-23 Fri 14:41]--[2018-03-23 Fri 19:05] =>  4:24
+:END:
+I'm constructing the entries quite fine but somehow the intermedia function
+refuses to get written even when it appears that its output is correct.
+** DONE Incorporate from beamer how the do the theme settings
+- State "DONE"       from "TODO"       [2018-03-23 Fri 16:01]
 This looks like a fancy way to avoid repetition. Have a look too trying to
 imitate that behavior for the other personal tags of social media,url,phones.
 * TODO Tune in latex export
