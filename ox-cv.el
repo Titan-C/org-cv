@@ -24,12 +24,18 @@
   :options-alist
   '((:mobile "MOBILE" nil nil parse)
     (:homepage "HOMEPAGE" nil nil parse)
-    (:address "ADDRESS" nil nil parse)
+    (:address "ADDRESS" nil nil newline)
     (:gitlab "GITLAB" nil nil parse)
     (:github "GITHUB" nil nil parse)
     (:linkedin "LINKEDIN" nil nil parse)
     )
   :translate-alist '((template . org-cv-template)))
+
+(defun org-cv--add-latex-newlines (string)
+  "Replace regular newlines with LaTeX newlines (i.e. `\\\\')"
+  (let ((str (org-trim string)))
+    (when (org-string-nw-p str)
+      (concat (replace-regexp-in-string "\n" "\\\\\\\\\n" str) "\\\\"))))
 
 ;;;; Template
 ;;
@@ -80,7 +86,7 @@ holding export options."
        (when linkedin (format "\\social[linkedin]{%s}\n" linkedin)))
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
-       (when address (format "\\address{%s}\n" address)))
+       (when address (format "\\address{%s}\n" (org-cv--add-latex-newlines address))))
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
        (format "\\date{%s}\n" (org-export-data date info)))
