@@ -155,10 +155,10 @@ holding export options."
 (defun org-cv-cventry (headline contents info)
   (let ((from-date (org-element-property :FROM headline))
         (to-date (org-element-property :TO headline))
-        (location (org-element-property :LOCATION headline))
-        (title (org-element-property :title headline))
-        (note (org-element-property :NOTE headline))
-        (employer (org-element-property :EMPLOYER headline)))
+        (title (org-export-data (org-element-property :title headline) info))
+        (employer (org-element-property :EMPLOYER headline))
+        (location (or (org-element-property :LOCATION headline) ""))
+        (note (or (org-element-property :NOTE headline) "")))
     (format "\\cventry{%s}{%s}{%s}{%s}{%s}{%s}\n"
             (concat (org-cv-timestamp-to-shortdate from-date)
                     " -- "
