@@ -172,16 +172,11 @@ holding export options."
 CONTENTS is the contents of the headline.  INFO is a plist used
 as a communication channel."
   (unless (org-element-property :footnote-section-p headline)
-    (let ((level (org-export-get-relative-level headline info))
-	  (frame-level (org-beamer--frame-level headline info))
-          (tags (org-export-get-tags headline info))
-
+    (let ((tags (org-export-get-tags headline info))
 	  (environment (let ((env (org-element-property :CV_ENV headline)))
 			 (or (org-string-nw-p env) "block"))))
       (cond
        ;; is a cv entry
        ((equal environment "cventry")
         (org-cv-cventry headline contents info))
-       (t (concat (format "%s %s %s %s %s\n" level tags frame-level environment
-                          contents)
-                ))))))
+       ((org-export-with-backend 'latex headline contents info))))))
