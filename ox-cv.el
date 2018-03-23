@@ -129,12 +129,6 @@ holding export options."
 	      ((string-match "\\(?:[^%]\\|^\\)%s" command)
 	       (format command title))
 	      (t command))))
-     ;; Table of contents.
-     (let ((depth (plist-get info :with-toc)))
-       (when depth
-	 (concat (when (integerp depth)
-		   (format "\\setcounter{tocdepth}{%d}\n" depth))
-		 (plist-get info :latex-toc-command))))
      ;; Document's body.
      contents
      ;; Creator.
