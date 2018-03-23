@@ -21,10 +21,20 @@ nice CV.
 I have the basic cv template that gets exported
 * TODO org-exporter for latex
 :LOGBOOK:
+CLOCK: [2018-03-22 Thu 23:17]--[2018-03-23 Fri 03:25] =>  4:08
 CLOCK: [2018-03-22 Thu 17:58]--[2018-03-22 Thu 18:37] =>  0:39
 :END:
 I'm comparing the contents of the template export function. It looks that
 this one give the genera document layout and this is where I shall insert
 them data.
 comparing ox-latex, ox-beamer, ox-koma
+
+I learned quite a lot from the main latex and koma files. Currently I
+already reproduce latex export, which is not much as that was already a
+working output. But now I have the specific keywords for the personal
+information part.
+** TODO Process headings with properties into cventries
+** TODO Incorporate from beamer how the do the theme settings
+This looks like a fancy way to avoid repetition. Have a look too trying to
+imitate that behavior for the other personal tags of social media,url,phones.
 * TODO Tune in latex export
