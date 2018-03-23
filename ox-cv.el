@@ -24,6 +24,7 @@
   :options-alist
   '((:mobile "MOBILE" nil nil parse)
     (:homepage "HOMEPAGE" nil nil parse)
+    (:address "ADDRESS" nil nil parse)
     (:gitlab "GITLAB" nil nil parse)
     (:github "GITHUB" nil nil parse)
     (:linkedin "LINKEDIN" nil nil parse)
@@ -77,6 +78,9 @@ holding export options."
      ;; linkedin
      (let ((linkedin (org-export-data (plist-get info :linkedin) info)))
        (when linkedin (format "\\social[linkedin]{%s}\n" linkedin)))
+     ;; address
+     (let ((address (org-export-data (plist-get info :address) info)))
+       (when address (format "\\address{%s}\n" address)))
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
        (format "\\date{%s}\n" (org-export-data date info)))
