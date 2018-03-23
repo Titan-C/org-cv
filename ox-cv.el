@@ -84,18 +84,21 @@ holding export options."
      ;; homepage
      (let ((homepage (org-export-data (plist-get info :homepage) info)))
        (when homepage (format "\\homepage{%s}\n" homepage)))
-     ;; github
-     (let ((github (org-export-data (plist-get info :github) info)))
-       (when github (format "\\social[github]{%s}\n" github)))
-     ;; gitlab
-     (let ((gitlab (org-export-data (plist-get info :gitlab) info)))
-       (when gitlab (format "\\social[gitlab]{%s}\n" gitlab)))
-     ;; linkedin
-     (let ((linkedin (org-export-data (plist-get info :linkedin) info)))
-       (when linkedin (format "\\social[linkedin]{%s}\n" linkedin)))
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
        (when address (format "\\address{%s}\n" (org-cv--add-latex-newlines address))))
+     (mapconcat (lambda (social-network)
+		  (let ((command (org-export-data (plist-get info
+							     (car social-network))
+						  info)))
+		    (and command (format "\\social[%s]{%s}\n"
+					 (nth 1 social-network)
+					 command))))
+		'((:github "github")
+		  (:gitlab "gitlab")
+	          (:linkedin "linkedin"))
+		"")
+
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
        (format "\\date{%s}\n" (org-export-data date info)))
