@@ -141,14 +141,29 @@ holding export options."
      ;; Document end.
      "\\end{document}")))
 
+
+(defun org-cv-timestamp-to-shortdate (date_str)
+  "e.g. <2002-08-12 Mon> => Aug 2012"
+  (let* ((abbreviate 't)
+	 (dte (org-parse-time-string date_str))
+	 (month (nth 4 dte))
+	 (year (nth 5 dte)));;'(02 07 2015)))
+    (concat (calendar-month-name month abbreviate)
+	    " "
+(number-to-string year))))
+
 (defun org-cv-cventry (headline contents info)
   (let ((from-date (org-element-property :FROM headline))
         (to-date (org-element-property :TO headline))
         (location (org-element-property :LOCATION headline))
         (title (org-element-property :title headline))
+        (note (org-element-property :NOTE headline))
         (employer (org-element-property :EMPLOYER headline)))
     (format "\\cventry{%s}{%s}{%s}{%s}{%s}{%s}\n"
-            "start" title employer location "de paso" contents)))
+            (concat (org-cv-timestamp-to-shortdate from-date)
+                    " -- "
+                    (org-cv-timestamp-to-shortdate to-date))
+            title employer location note contents)))
 
 
 ;;;; Headline
