@@ -59,7 +59,7 @@ holding export options."
      (and (plist-get info :time-stamp-file)
 	  (format-time-string "%% Created %Y-%m-%d %a %H:%M\n"))
      ;; LaTeX compiler.
-     ;;(org-latex--insert-compiler info)
+     (org-latex--insert-compiler info)
      ;; Document class and packages.
      (org-latex-make-preamble info)
      ;; cvstyle
