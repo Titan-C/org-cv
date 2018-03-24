@@ -33,12 +33,20 @@ I learned quite a lot from the main latex and koma files. Currently I
 already reproduce latex export, which is not much as that was already a
 working output. But now I have the specific keywords for the personal
 information part.
-** TODO Process headings with properties into cventries
+** TODO Make a package
+Complete the file with license and how to load it.
+** DONE Process headings with properties into cventries
+- State "DONE"       from "TODO"       [2018-03-24 Sat 03:02]
 :LOGBOOK:
+CLOCK: [2018-03-23 Fri 22:54]--[2018-03-24 Sat 03:05] =>  4:11
 CLOCK: [2018-03-23 Fri 14:41]--[2018-03-23 Fri 19:05] =>  4:24
 :END:
 I'm constructing the entries quite fine but somehow the intermedia function
 refuses to get written even when it appears that its output is correct.
+
+I don't fully understand. But it appear that I need to call the exporter
+again within the exporting of the headings. This maybe is what helps
+getting down the subtrees and getting to the latex output.
 ** DONE Incorporate from beamer how the do the theme settings
 - State "DONE"       from "TODO"       [2018-03-23 Fri 16:01]
 This looks like a fancy way to avoid repetition. Have a look too trying to
