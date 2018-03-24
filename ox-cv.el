@@ -28,9 +28,11 @@
     (:mobile "MOBILE" nil nil parse)
     (:homepage "HOMEPAGE" nil nil parse)
     (:address "ADDRESS" nil nil newline)
+    (:photo "PHOTO" nil nil parse)
     (:gitlab "GITLAB" nil nil parse)
     (:github "GITHUB" nil nil parse)
     (:linkedin "LINKEDIN" nil nil parse)
+    (:with-email nil "email" t t)
     )
   :translate-alist '((template . org-cv-template)
 		     (headline . org-cv-headline)))
@@ -75,6 +77,9 @@ holding export options."
 			(let ((auth (plist-get info :author)))
 			  (and auth (org-export-data auth info))))))
        (format "\\name{%s}{}\n" author))
+     ;; photo
+     (let ((photo (org-export-data (plist-get info :photo) info)))
+       (when (org-string-nw-p photo) (format "\\photo{%s}\n" photo)))
      ;; email
      (let ((email (and (plist-get info :with-email)
 		       (org-export-data (plist-get info :email) info))))
