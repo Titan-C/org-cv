@@ -159,7 +159,7 @@ holding export options."
         (employer (org-element-property :EMPLOYER headline))
         (location (or (org-element-property :LOCATION headline) ""))
         (note (or (org-element-property :NOTE headline) "")))
-    (format "\\cventry{%s}{%s}{%s}{%s}{%s}{%s}\n"
+    (format "\\cventry{\\textbf{%s}}{%s}{%s}{%s}{%s}{%s}\n"
             (concat (org-cv-timestamp-to-shortdate from-date)
                     " -- "
                     (org-cv-timestamp-to-shortdate to-date))
