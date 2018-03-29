@@ -67,13 +67,6 @@
   :translate-alist '((template . org-moderncv-template)
 		     (headline . org-moderncv-headline)))
 
-(defun org-moderncv--add-latex-newlines (string)
-  "Replace regular newlines in STRING with LaTeX newlines.
-
-  (i.e. `\\\\')"
-  (let ((str (org-trim string)))
-    (when (org-string-nw-p str)
-      (concat (replace-regexp-in-string "\n" "\\\\\\\\\n" str) "\\\\"))))
 
 ;;;; Template
 ;;
@@ -124,7 +117,8 @@ holding export options."
        (when homepage (format "\\homepage{%s}\n" homepage)))
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
-       (when address (format "\\address{%s}\n" (org-moderncv--add-latex-newlines address))))
+       (when address (format "\\address%s\n" (mapconcat (lambda (line) (format "{%s}" line))
+                                                        (split-string address "\n") ""))))
      (mapconcat (lambda (social-network)
 		  (let ((command (org-export-data (plist-get info
 							     (car social-network))
