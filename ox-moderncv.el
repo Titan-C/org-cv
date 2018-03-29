@@ -1,7 +1,37 @@
+;;; ox-latex-cv.el --- LaTeX moderncv Back-End for Org Export Engine -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2018 Free Software Foundation, Inc.
+
+;; Author: Oscar Najera <hi AT oscarnajera.com DOT com>
+;; Keywords: org, wp, tex
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Commentary:
+;;
+;; This library implements a LaTeX moderncv back-end, derived from the
+;; LaTeX one.
+
+;;; Code:
 (require 'cl-lib)
 (require 'ox-latex)
 
-;; Install a default set-up for Beamer export.
+;; Install a default set-up for moderncv export.
 (unless (assoc "orgcv" org-latex-classes)
   (add-to-list 'org-latex-classes
 	       '("orgcv"
@@ -34,11 +64,13 @@
     (:linkedin "LINKEDIN" nil nil parse)
     (:with-email nil "email" t t)
     )
-  :translate-alist '((template . org-cv-template)
-		     (headline . org-cv-headline)))
+  :translate-alist '((template . org-moderncv-template)
+		     (headline . org-moderncv-headline)))
 
-(defun org-cv--add-latex-newlines (string)
-  "Replace regular newlines with LaTeX newlines (i.e. `\\\\')"
+(defun org-moderncv--add-latex-newlines (string)
+  "Replace regular newlines in STRING with LaTeX newlines.
+
+  (i.e. `\\\\')"
   (let ((str (org-trim string)))
     (when (org-string-nw-p str)
       (concat (replace-regexp-in-string "\n" "\\\\\\\\\n" str) "\\\\"))))
@@ -46,9 +78,9 @@
 ;;;; Template
 ;;
 ;; Template used is similar to the one used in `latex' back-end,
-;; excepted for the table of contents and Beamer themes.
+;; excepted for the table of contents and moderncv themes.
 
-(defun org-cv-template (contents info)
+(defun org-moderncv-template (contents info)
   "Return complete document string after LaTeX conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
@@ -92,7 +124,7 @@ holding export options."
        (when homepage (format "\\homepage{%s}\n" homepage)))
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
-       (when address (format "\\address{%s}\n" (org-cv--add-latex-newlines address))))
+       (when address (format "\\address{%s}\n" (org-moderncv--add-latex-newlines address))))
      (mapconcat (lambda (social-network)
 		  (let ((command (org-export-data (plist-get info
 							     (car social-network))
@@ -147,8 +179,10 @@ holding export options."
      "\\end{document}")))
 
 
-(defun org-cv-timestamp-to-shortdate (date_str)
-  "e.g. <2002-08-12 Mon> => Aug 2012"
+(defun org-moderncv-timestamp-to-shortdate (date_str)
+  "Format orgmode timestamp DATE_STR  into a short form date.
+
+e.g. <2002-08-12 Mon> => Aug 2012"
   (let* ((abbreviate 't)
 	 (dte (org-parse-time-string date_str))
 	 (month (nth 4 dte))
@@ -157,7 +191,10 @@ holding export options."
 	    " "
 (number-to-string year))))
 
-(defun org-cv-cventry (headline contents info)
+(defun org-moderncv--format-cventry (headline contents info)
+  "Format HEADLINE as as cventry.
+CONTENTS holds the contents of the headline.  INFO is a plist used
+as a communication channel."
   (let ((from-date (org-element-property :FROM headline))
         (to-date (org-element-property :TO headline))
         (title (org-export-data (org-element-property :title headline) info))
@@ -165,23 +202,25 @@ holding export options."
         (location (or (org-element-property :LOCATION headline) ""))
         (note (or (org-element-property :NOTE headline) "")))
     (format "\\cventry{\\textbf{%s}}{%s}{%s}{%s}{%s}{%s}\n"
-            (concat (org-cv-timestamp-to-shortdate from-date)
+            (concat (org-moderncv-timestamp-to-shortdate from-date)
                     " -- "
-                    (org-cv-timestamp-to-shortdate to-date))
+                    (org-moderncv-timestamp-to-shortdate to-date))
             title employer location note contents)))
 
 
 ;;;; Headline
-(defun org-cv-headline (headline contents info)
-  "Transcode HEADLINE element into Beamer code.
+(defun org-moderncv-headline (headline contents info)
+  "Transcode HEADLINE element into moderncv code.
 CONTENTS is the contents of the headline.  INFO is a plist used
 as a communication channel."
   (unless (org-element-property :footnote-section-p headline)
-    (let ((tags (org-export-get-tags headline info))
-	  (environment (let ((env (org-element-property :CV_ENV headline)))
+    (let ((environment (let ((env (org-element-property :CV_ENV headline)))
 			 (or (org-string-nw-p env) "block"))))
       (cond
        ;; is a cv entry
        ((equal environment "cventry")
-        (org-cv-cventry headline contents info))
+        (org-moderncv--format-cventry headline contents info))
        ((org-export-with-backend 'latex headline contents info))))))
+
+(provide 'ox-moderncv)
+;;; ox-moderncv ends here
