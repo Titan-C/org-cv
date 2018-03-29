@@ -133,6 +133,10 @@ holding export options."
        (when (org-string-nw-p photo) (format "\\photo{2.8cm}{%s}\n" photo)))
 
      "\\personalinfo{\n"
+     ;; address
+     (let ((address (org-export-data (plist-get info :address) info)))
+       (when address (format "\\mailaddress{%s}\n" (mapconcat (lambda (line) (format "%s" line))
+                                                        (split-string address "\n") " -- "))))
      ;; email
      (let ((email (and (plist-get info :with-email)
 		       (org-export-data (plist-get info :email) info))))
@@ -143,10 +147,6 @@ holding export options."
      ;; homepage
      (let ((homepage (org-export-data (plist-get info :homepage) info)))
        (when homepage (format "\\homepage{%s}\n" homepage)))
-     ;; address
-     (let ((address (org-export-data (plist-get info :address) info)))
-       (when address (format "\\mailaddress{%s}\n" (mapconcat (lambda (line) (format "%s" line))
-                                                        (split-string address "\n") " -- "))))
      (mapconcat (lambda (social-network)
 		  (let ((command (org-export-data (plist-get info
 							     (car social-network))
