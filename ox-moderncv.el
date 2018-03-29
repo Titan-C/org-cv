@@ -1,4 +1,4 @@
-;;; ox-latex-cv.el --- LaTeX moderncv Back-End for Org Export Engine -*- lexical-binding: t; -*-
+;;; ox-moderncv.el --- LaTeX moderncv Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Free Software Foundation, Inc.
 
@@ -32,9 +32,9 @@
 (require 'ox-latex)
 
 ;; Install a default set-up for moderncv export.
-(unless (assoc "orgcv" org-latex-classes)
+(unless (assoc "moderncv" org-latex-classes)
   (add-to-list 'org-latex-classes
-	       '("orgcv"
+	       '("moderncv"
 		 "\\documentclass{moderncv}"
 		 ("\\section{%s}" . "\\section*{%s}")
 		 ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -50,7 +50,7 @@
   :version "25.3")
 
 ;;; Define Back-End
-(org-export-define-derived-backend 'orgcv 'latex
+(org-export-define-derived-backend 'moderncv 'latex
   :options-alist
   '(
     (:cvstyle "CVSTYLE" nil "classic" t)
