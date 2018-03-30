@@ -71,13 +71,17 @@
 (defun colorconf ()
   "puts color"
   "% Change the colours if you want to
-\\definecolor{VividPurple}{HTML}{3E0097}
+\\definecolor{VividPurple}{HTML}{009900}
 \\definecolor{SlateGrey}{HTML}{2E2E2E}
 \\definecolor{LightGrey}{HTML}{333333}
 \\colorlet{heading}{VividPurple}
 \\colorlet{accent}{VividPurple}
 \\colorlet{emphasis}{SlateGrey}
 \\colorlet{body}{LightGrey}
+\\hypersetup{
+ colorlinks=true,
+ urlcolor=olive!50!black!30!green,
+ }
 "
 )
 ;;;; Template
