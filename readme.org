@@ -1,4 +1,4 @@
-#+TITLE:  Org exporter for curriculum vitaes
+#+TITLE:  Org exporter for curriculum vitae
 #+AUTHOR: Óscar Nájera
 #+EMAIL:  hello@oscarnajera.com
 #+DATE:   2018 Mar 22
@@ -12,14 +12,21 @@
 #+LaTeX_HEADER: \usemintedstyle{friendly}
 #+LaTeX_HEADER: \newminted{common-lisp}{fontsize=\footnotesize}
 
-This project aim on generating from an orgmode file with reasonably ordered
+This project aims on generating from an orgmode file with reasonably ordered
 items of live to export to a latex file which compiles into a reasonably
 nice CV.
 
+* Update readme
+** TODO examples [0/2]
+*** TODO pictures
+*** TODO scripts
+* TODO Make a package
+Complete the file with license and how to load it.
 * DONE Base environment
 - State "DONE"       from "TODO"       [2018-03-22 Thu 17:57]
 I have the basic cv template that gets exported
-* TODO org-exporter for latex
+* DONE org-exporter for latex
+- State "DONE"       from "TODO"       [2018-04-05 Thu 03:04]
 :LOGBOOK:
 CLOCK: [2018-03-22 Thu 23:17]--[2018-03-23 Fri 03:25] =>  4:08
 CLOCK: [2018-03-22 Thu 17:58]--[2018-03-22 Thu 18:37] =>  0:39
@@ -33,8 +40,6 @@ I learned quite a lot from the main latex and koma files. Currently I
 already reproduce latex export, which is not much as that was already a
 working output. But now I have the specific keywords for the personal
 information part.
-** TODO Make a package
-Complete the file with license and how to load it.
 ** DONE Process headings with properties into cventries
 - State "DONE"       from "TODO"       [2018-03-24 Sat 03:02]
 :LOGBOOK:
@@ -51,4 +56,4 @@ getting down the subtrees and getting to the latex output.
 - State "DONE"       from "TODO"       [2018-03-23 Fri 16:01]
 This looks like a fancy way to avoid repetition. Have a look too trying to
 imitate that behavior for the other personal tags of social media,url,phones.
-* TODO Tune in latex export
+* DONE Markdown exporter for integration with hugo blog
