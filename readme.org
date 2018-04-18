@@ -34,7 +34,7 @@ use =use-package= to manage my installed packages like this.
 
 * Basic Org file
 The basic structure of an org file containing your CV is shown next.
-#+BEGIN_SRC text :tangle basic_cv.org
+#+BEGIN_SRC org :tangle basic_cv.org
 ,#+TITLE: My dream job
 ,#+AUTHOR: John Doe
 
@@ -56,6 +56,7 @@ The basic structure of an org file containing your CV is shown next.
 :EMPLOYER: The employer
 :END:
 I write about awesome stuff I do.
+
 ,* Other stuff I do
 - I work a lot
 - I sleep a lot
@@ -81,7 +82,7 @@ org file.
 #+END_SRC
 
 When exporting you can call the following function to get the latex file.
-#+BEGIN_SRC emacs-lisp :exports none
+#+BEGIN_SRC emacs-lisp
 (org-export-to-file 'moderncv "moderncv.tex")
 #+END_SRC
 
@@ -100,20 +101,21 @@ sections branch.
 The style of this CV is more involved and you need some configuration in
 your org file to get it to work. First define the margins, the large margin
 to the right is to allow for a second column.
-#+BEGIN_SRC text
-#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
+#+BEGIN_SRC org
+,#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
 #+END_SRC
 Content on the right column has the same structure of a org file, but you
 need to enclose it in the =\marginpar{}= command as shown next.
-#+BEGIN_SRC text
-#+latex: \marginpar{
 
-* Main Interests
+#+BEGIN_SRC org
+,#+latex: \marginpar{
+
+,* Main Interests
 - Free/Libre and Open Source Software (FLOSS)
 - Free food
 - Free beer
 
-* Programming Languages
+,* Programming Languages
 - Python
 - C/C++
 - EmacsLisp
@@ -121,15 +123,16 @@ need to enclose it in the =\marginpar{}= command as shown next.
 - JavaScript
 - PHP
 
-* Languages
+,* Languages
 
 - *English*  Fluent
 - *German*   Fluent
 - *Spanish*  Native
 - *French*   Intermediate
 
-#+latex: }
+,#+latex: }
 #+END_SRC
+
 * Update readme
 ** TODO examples [0/2]
 *** TODO pictures
