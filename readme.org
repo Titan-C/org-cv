@@ -10,11 +10,47 @@
 # This is for syntax highlight
 #+LaTeX_HEADER: \usepackage{minted}
 #+LaTeX_HEADER: \usemintedstyle{friendly}
-#+LaTeX_HEADER: \newminted{common-lisp}{fontsize=\footnotesize}
 
-This project aims on generating from an orgmode file with reasonably ordered
-items of live to export to a latex file which compiles into a reasonably
-nice CV.
+This project aims to generate from an org-mode file with reasonably ordered
+items a latex file which compiles into a reasonably nice CV. In the same
+spirit the org-mode file must export to markdown so that it can be uses for
+web based CV.
+* Installation
+
+* Basic Org file
+#+BEGIN_SRC text :tangle basic_cv.org
+,#+TITLE: My dream job
+,#+AUTHOR: John Doe
+
+,#+ADDRESS: My Awesome crib
+,#+ADDRESS: Fantastic city -- Planet Earth
+,#+MOBILE: (+9) 87654321
+,#+HOMEPAGE: example.com
+,#+GITHUB: Titan-C
+,#+GITLAB: Titan-C
+,#+PHOTO: smile.jpg
+,* Employement
+,** One job
+:PROPERTIES:
+:CV_ENV: cventry
+:FROM:     <2014-09-01>
+:TO:     <2017-12-07>
+:LOCATION: a city, a country
+:EMPLOYER: The employer
+:END:
+I write about awesome stuff I do.
+,* Other stuff I do
+- I work a lot
+- I sleep a lot
+- I eat a lot
+,* Languages
+I like languages: strict and human
+#+END_SRC
+
+* Latex Exporter
+** Using modern-cv
+I first started using latex modern-cv styles as the target for my CV.
+** Using alta-cv
 
 * Update readme
 ** TODO examples [0/2]
