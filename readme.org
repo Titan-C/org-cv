@@ -34,6 +34,22 @@ use =use-package= to manage my installed packages like this.
 
 * Basic Org file
 The basic structure of an org file containing your CV is shown next.
+** Personal contact information
+=TITLE= and =AUTHOR= are standard org options. But on =TITLE= you put your
+foreseen job.
+
+| Field    | Description                                        |
+|----------+----------------------------------------------------|
+| TITLE    | Desired job                                        |
+| AUTHOR   | Who you are?                                       |
+| ADDRESS  | Mailing address, this can span over multiple lines |
+| HOMEPAGE | URL of your website                                |
+| MOBILE   | Mobile phone                                       |
+| GITHUB   | GitHub user                                        |
+| GITLAB   | GitLab user                                        |
+| LINKEDIN | Linkedin username                                  |
+| PHOTO    | path to photo file                                 |
+
 #+BEGIN_SRC org :tangle basic_cv.org
 ,#+TITLE: My dream job
 ,#+AUTHOR: John Doe
@@ -44,8 +60,16 @@ The basic structure of an org file containing your CV is shown next.
 ,#+HOMEPAGE: example.com
 ,#+GITHUB: Titan-C
 ,#+GITLAB: Titan-C
+,#+LINKEDIN: oscar-najera
 ,#+PHOTO: smile.jpg
+#+END_SRC
 
+You can use org-modes hierarchical structure to describe your CV. To make a
+specific subtree an item describing an experience point (Job you have,
+degree you pursued, etc.) you use the org properties drawer and with the
+=:CV_ENV: cventry= property. You should also include the =FROM= and =TO=
+properties defining the span of the event, as =LOCATION= and =EMPLOYER=.
+#+BEGIN_SRC org :tangle workcontent.org
 ,* Employement
 ,** One job
 :PROPERTIES:
@@ -55,16 +79,14 @@ The basic structure of an org file containing your CV is shown next.
 :LOCATION: a city, a country
 :EMPLOYER: The employer
 :END:
+
 I write about awesome stuff I do.
 
 ,* Other stuff I do
 - I work a lot
 - I sleep a lot
 - I eat a lot
-,* Languages
-I like languages: strict and human
 #+END_SRC
-
 * Latex Exporter
 ** Using modern-cv
 [[https://www.ctan.org/tex-archive/macros/latex/contrib/moderncv][moderncv]] is a standard \(\LaTeX\) package that you can find in many of your
