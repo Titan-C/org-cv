@@ -1,21 +1,19 @@
 #+TITLE:  Org exporter for curriculum vitae
 #+AUTHOR: Óscar Nájera
 #+EMAIL:  hello@oscarnajera.com
-#+DATE:   2018 Mar 22
-#+LATEX_HEADER: \usepackage[top=2cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
-#+LATEX_HEADER: \usepackage{indentfirst}
-#+LATEX_CLASS_OPTIONS: [a4paper,12pt]
-#+STARTUP: hideblocks
-#+OPTIONS: toc:nil num:nil
-# This is for syntax highlight
-#+LaTeX_HEADER: \usepackage{minted}
-#+LaTeX_HEADER: \usemintedstyle{friendly}
+
+#+HUGO_BASE_DIR: doc
+#+HUGO_SECTION: post
+#+HUGO_WEIGHT: auto
 
 This project aims to generate from an org-mode file with reasonably ordered
 items a latex file which compiles into a reasonably nice CV. In the same
 spirit the org-mode file must export to markdown so that it can be uses for
 web based CV.
 * Installation
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: installation
+  :END:
 This project is not on MELPA so you have to do a manual installation. First
 clone this git repository.
 #+BEGIN_SRC bash
@@ -24,15 +22,18 @@ git clone https://gitlab.com/Titan-C/org-cv.git
 
 There are various modules to perform the export. As of now =ox-moderncv=,
 =ox-altacv=, =ox-hugocv=. Choose any or all that you prefer for install. I
-use =use-package= to manage my installed packages like this.
+use =use-package= to manage the installation for example of =ox-moderncv=.
 
 #+BEGIN_SRC emacs-lisp
 (use-package ox-moderncv
-    :load-path "~/dev/org-cv/"
+    :load-path "path_to_repository/org-cv/"
     :init (require 'ox-moderncv))
 #+END_SRC
 
 * Basic Org file
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: basic_config
+  :END:
 The basic structure of an org file containing your CV is shown next.
 ** Personal contact information
 =TITLE= and =AUTHOR= are standard org options. But on =TITLE= you put your
@@ -50,7 +51,7 @@ foreseen job.
 | LINKEDIN | Linkedin username                                  |
 | PHOTO    | path to photo file                                 |
 
-#+BEGIN_SRC org :tangle basic_cv.org
+#+BEGIN_SRC org :tangle doc/basic_cv.org
 ,#+TITLE: My dream job
 ,#+AUTHOR: John Doe
 
@@ -69,7 +70,7 @@ specific subtree an item describing an experience point (Job you have,
 degree you pursued, etc.) you use the org properties drawer and with the
 =:CV_ENV: cventry= property. You should also include the =FROM= and =TO=
 properties defining the span of the event, as =LOCATION= and =EMPLOYER=.
-#+BEGIN_SRC org :tangle workcontent.org
+#+BEGIN_SRC org :tangle doc/workcontent.org
 ,* Employement
 ,** One job
 :PROPERTIES:
@@ -98,6 +99,10 @@ I write about awesome stuff I do.
 - I eat a lot
 #+END_SRC
 * Latex Exporter
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: latex_export
+  :END:
+
 ** Using modern-cv
 [[https://www.ctan.org/tex-archive/macros/latex/contrib/moderncv][moderncv]] is a standard \(\LaTeX\) package that you can find in many of your
 latex distributions. For I maintain for personal purposes a fork of it to
@@ -106,7 +111,7 @@ Feel free to use any or even your personal fork for your desired use case.
 
 To configure the export for moderncv you need the addition options in your
 org file.
-#+BEGIN_SRC org :tangle moderncv.org
+#+BEGIN_SRC org :tangle doc/moderncv.org
 # CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
 ,#+CVSTYLE: banking
 # CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
@@ -114,7 +119,7 @@ org file.
 #+END_SRC
 
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle moderncv.org
+#+BEGIN_SRC org :exports none :tangle doc/moderncv.org
 #+include: basic_cv.org
 #+include: sideactivities.org
 #+include: workcontent.org
@@ -122,13 +127,6 @@ org file.
 When exporting you can call the following function to get the latex file.
 #+BEGIN_SRC emacs-lisp
 (org-export-to-file 'moderncv "moderncv.tex")
-#+END_SRC
-
-or you can have a hook to do the export when you save a file.
-#+BEGIN_SRC org
-# Local Variables:
-# eval: (add-hook 'after-save-hook #'org-hugo-export-wim-to-md-after-save :append :local)
-# End:
 #+END_SRC
 ** Using alta-cv
 [[https://github.com/liantze/AltaCV][AltaCV]] is another project to generate a CV, you will need to install it
@@ -139,19 +137,19 @@ sections branch.
 The style of this CV is more involved and you need some configuration in
 your org file to get it to work. First define the margins, the large margin
 to the right is to allow for a second column.
-#+BEGIN_SRC org :tangle altacv.org
+#+BEGIN_SRC org :tangle doc/altacv.org
 ,#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle altacv.org
+#+BEGIN_SRC org :exports none :tangle doc/altacv.org
 #+include: basic_cv.org
 #+END_SRC
 Content on the right column has the same structure of a org file, but you
 need to enclose it in the =\marginpar{}= command as shown next.
-#+BEGIN_SRC org :tangle altacv.org
+#+BEGIN_SRC org :tangle doc/altacv.org
 ,#+latex: \marginpar{
 #+END_SRC
-#+BEGIN_SRC org :tangle sideactivities.org
+#+BEGIN_SRC org :tangle doc/sideactivities.org
 ,* Main Interests
 - Free/Libre and Open Source Software (FLOSS)
 - Free food
@@ -173,14 +171,14 @@ need to enclose it in the =\marginpar{}= command as shown next.
 - *French*   Intermediate
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle altacv.org
+#+BEGIN_SRC org :exports none :tangle doc/altacv.org
 #+include: sideactivities.org
 #+END_SRC
-#+BEGIN_SRC org :tangle altacv.org
+#+BEGIN_SRC org :tangle doc/altacv.org
 ,#+latex: }
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle altacv.org
+#+BEGIN_SRC org :exports none :tangle doc/altacv.org
 #+include: workcontent.org
 #+END_SRC
 
@@ -225,3 +223,7 @@ getting down the subtrees and getting to the latex output.
 This looks like a fancy way to avoid repetition. Have a look too trying to
 imitate that behavior for the other personal tags of social media,url,phones.
 * DONE Markdown exporter for integration with hugo blog
+* Local Variables                                                   :ARCHIVE:
+# Local Variables:
+# eval: (add-hook 'after-save-hook #'org-hugo-export-wim-to-md-after-save :append :local)
+# End:

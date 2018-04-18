@@ -1,0 +1,15 @@
+image: najeraoscar/latex-emacs-min
+
+test:
+  script:
+  - apt-get update
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.39/hugo_0.39_Linux-64bit.deb
+  - dpkg -i hugo*.deb
+  - hugo version
+  - cd doc; hugo
+  except:
+  - master
+
+  artifacts:
+    paths:
+      - doc/public
