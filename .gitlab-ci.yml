@@ -2,10 +2,14 @@ image: najeraoscar/latex-emacs-min
 
 test:
   script:
-  - apt-get update
+  - apt-get update && apt install wget
   - wget https://github.com/gohugoio/hugo/releases/download/v0.39/hugo_0.39_Linux-64bit.deb
   - dpkg -i hugo*.deb
   - hugo version
+  - mkdir -p ~/tex/latex
+  - cd ~/tex/latex/; git clone https://github.com/Titan-C/AltaCV.git
+  - emacs --batch -Q --script genfiles.el
+  - cd org-cv-exports; latex -pdf altacv.org.tex
   - cd doc; hugo
   except:
   - master
