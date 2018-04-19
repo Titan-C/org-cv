@@ -25,7 +25,7 @@
     (find-file workfile)
     (org-mode)
     (org-export-to-file 'altacv outfile)
-    (org-latex-compile outfile)
+    (shell-command (format "latexmk -pdf %s" outfile))
     ))
 
 (export-latex "altacv.org")
