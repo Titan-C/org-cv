@@ -2,7 +2,7 @@ image: najeraoscar/latex-emacs-min
 
 test:
   script:
-  - apt-get update && apt install wget
+  - apt-get update && apt install wget git
   - wget https://github.com/gohugoio/hugo/releases/download/v0.39/hugo_0.39_Linux-64bit.deb
   - dpkg -i hugo*.deb
   - hugo version
