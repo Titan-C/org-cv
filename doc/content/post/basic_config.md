@@ -36,7 +36,7 @@ foreseen job.
 #+GITHUB: Titan-C
 #+GITLAB: Titan-C
 #+LINKEDIN: oscar-najera
-#+PHOTO: smile.jpg
+#+PHOTO: smile.png
 ```
 
 You can use org-modes hierarchical structure to describe your CV. To make a

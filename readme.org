@@ -51,7 +51,7 @@ foreseen job.
 | LINKEDIN | Linkedin username                                  |
 | PHOTO    | path to photo file                                 |
 
-#+BEGIN_SRC org :tangle doc/basic_cv.org
+#+BEGIN_SRC org :tangle basic_cv.org
 ,#+TITLE: My dream job
 ,#+AUTHOR: John Doe
 
@@ -62,7 +62,7 @@ foreseen job.
 ,#+GITHUB: Titan-C
 ,#+GITLAB: Titan-C
 ,#+LINKEDIN: oscar-najera
-,#+PHOTO: smile.jpg
+,#+PHOTO: smile.png
 #+END_SRC
 
 You can use org-modes hierarchical structure to describe your CV. To make a
@@ -70,7 +70,7 @@ specific subtree an item describing an experience point (Job you have,
 degree you pursued, etc.) you use the org properties drawer and with the
 =:CV_ENV: cventry= property. You should also include the =FROM= and =TO=
 properties defining the span of the event, as =LOCATION= and =EMPLOYER=.
-#+BEGIN_SRC org :tangle doc/workcontent.org
+#+BEGIN_SRC org :tangle workcontent.org
 ,* Employement
 ,** One job
 :PROPERTIES:
@@ -111,7 +111,7 @@ Feel free to use any or even your personal fork for your desired use case.
 
 To configure the export for moderncv you need the addition options in your
 org file.
-#+BEGIN_SRC org :tangle doc/moderncv.org
+#+BEGIN_SRC org :tangle moderncv.org
 # CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
 ,#+CVSTYLE: banking
 # CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
@@ -119,7 +119,7 @@ org file.
 #+END_SRC
 
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle doc/moderncv.org
+#+BEGIN_SRC org :exports none :tangle moderncv.org
 #+include: basic_cv.org
 #+include: sideactivities.org
 #+include: workcontent.org
@@ -137,19 +137,19 @@ sections branch.
 The style of this CV is more involved and you need some configuration in
 your org file to get it to work. First define the margins, the large margin
 to the right is to allow for a second column.
-#+BEGIN_SRC org :tangle doc/altacv.org
+#+BEGIN_SRC org :tangle altacv.org
 ,#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle doc/altacv.org
+#+BEGIN_SRC org :exports none :tangle altacv.org
 #+include: basic_cv.org
 #+END_SRC
 Content on the right column has the same structure of a org file, but you
 need to enclose it in the =\marginpar{}= command as shown next.
-#+BEGIN_SRC org :tangle doc/altacv.org
+#+BEGIN_SRC org :tangle altacv.org
 ,#+latex: \marginpar{
 #+END_SRC
-#+BEGIN_SRC org :tangle doc/sideactivities.org
+#+BEGIN_SRC org :tangle sideactivities.org
 ,* Main Interests
 - Free/Libre and Open Source Software (FLOSS)
 - Free food
@@ -171,14 +171,14 @@ need to enclose it in the =\marginpar{}= command as shown next.
 - *French*   Intermediate
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle doc/altacv.org
+#+BEGIN_SRC org :exports none :tangle altacv.org
 #+include: sideactivities.org
 #+END_SRC
-#+BEGIN_SRC org :tangle doc/altacv.org
+#+BEGIN_SRC org :tangle altacv.org
 ,#+latex: }
 #+END_SRC
 # Next block is to generate exports
-#+BEGIN_SRC org :exports none :tangle doc/altacv.org
+#+BEGIN_SRC org :exports none :tangle altacv.org
 #+include: workcontent.org
 #+END_SRC
 
