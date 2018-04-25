@@ -8,6 +8,7 @@ theme = "project-landing-page"
     author_url = "http://blog.oscarnajera.com"
     author = "Titan-C"
     project_url = "https://gitlab.com/Titan-C/org-cv/"
+    logo = "https://upload.wikimedia.org/wikipedia/commons/a/a6/Org-mode-unicorn.svg"
 
     first_color="#f8f8f8"
     first_border_color="#e7e7e7"
