@@ -1,4 +1,4 @@
-image: latex-emacs-min-org
+image: najeraoscar/latex-emacs-min
 
 test:
   script:
