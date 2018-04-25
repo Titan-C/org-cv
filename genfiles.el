@@ -29,5 +29,4 @@
     ))
 
 (export-latex "altacv.org")
-(message "yo")
 (copy-directory workdir cwd)

@@ -1,4 +1,4 @@
-image: najeraoscar/latex-emacs-min
+image: latex-emacs-min-org
 
 test:
   script:
@@ -6,7 +6,6 @@ test:
   - wget https://github.com/gohugoio/hugo/releases/download/v0.39/hugo_0.39_Linux-64bit.deb
   - dpkg -i hugo*.deb
   - hugo version
-  - mkdir -p ~/tex/latex
   - git clone https://github.com/Titan-C/AltaCV.git /usr/share/texmf/tex/latex/AltaCV
   - emacs --batch --load /tmp/install-org.el
   - emacs --batch -Q --script genfiles.el
