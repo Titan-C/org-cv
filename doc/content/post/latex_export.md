@@ -33,8 +33,8 @@ When exporting you can call the following function to get the latex file.
 
 [AltaCV](https://github.com/liantze/AltaCV) is another project to generate a CV, you will need to install it
 yourself. I maintain a fork too at <https://github.com/Titan-C/AltaCV.git>
-because I need extra features and I encourage to use this for on the
-sections branch.
+because I need extra features and I encourage to use this fork on the
+`sections` branch.
 
 The style of this CV is more involved and you need some configuration in
 your org file to get it to work. First define the margins, the large margin
@@ -75,4 +75,10 @@ need to enclose it in the `\marginpar{}` command as shown next.
 
 ```org
 #+latex: }
+```
+
+When exporting you can call the following function to get the latex file.
+
+```emacs-lisp
+(org-export-to-file 'moderncv "moderncv.tex")
 ```
