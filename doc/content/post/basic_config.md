@@ -2,7 +2,7 @@
 title = "Basic Org file"
 author = ["Óscar Nájera"]
 draft = false
-weight = 1002
+weight = 1003
 +++
 
 The basic structure of an org file containing your CV is shown next.
@@ -10,13 +10,14 @@ The basic structure of an org file containing your CV is shown next.
 
 ## Personal contact information {#personal-contact-information}
 
-`TITLE` and `AUTHOR` are standard org options. But on `TITLE` you put your
-foreseen job.
+`TITLE`, `AUTHOR` and `EMAIL` are standard org options. But on `TITLE` you
+put your foreseen job.
 
 | Field    | Description                                        |
 |----------|----------------------------------------------------|
 | TITLE    | Desired job                                        |
 | AUTHOR   | Who you are?                                       |
+| EMAIL    | Your contact email                                 |
 | ADDRESS  | Mailing address, this can span over multiple lines |
 | HOMEPAGE | URL of your website                                |
 | MOBILE   | Mobile phone                                       |

@@ -2,7 +2,7 @@
 title = "Latex Exporter"
 author = ["Óscar Nájera"]
 draft = false
-weight = 1003
+weight = 1004
 +++
 
 ## Using modern-cv {#using-modern-cv}
