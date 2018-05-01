@@ -13,6 +13,9 @@ The basic structure of an org file containing your CV is shown next.
 `TITLE`, `AUTHOR` and `EMAIL` are standard org options. But on `TITLE` you
 put your foreseen job.
 
+<div class="ox-hugo-table table table-striped">
+<div></div>
+
 | Field    | Description                                        |
 |----------|----------------------------------------------------|
 | TITLE    | Desired job                                        |
@@ -25,6 +28,8 @@ put your foreseen job.
 | GITLAB   | GitLab user                                        |
 | LINKEDIN | Linkedin username                                  |
 | PHOTO    | path to photo file                                 |
+
+</div>
 
 ```org
 #+TITLE: My dream job

@@ -43,6 +43,7 @@ The basic structure of an org file containing your CV is shown next.
 =TITLE=, =AUTHOR= and =EMAIL= are standard org options. But on =TITLE= you
 put your foreseen job.
 
+#+attr_html: :class table table-striped
 | Field    | Description                                        |
 |----------+----------------------------------------------------|
 | TITLE    | Desired job                                        |
