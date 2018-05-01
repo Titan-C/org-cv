@@ -6,6 +6,10 @@
 #+HUGO_SECTION: post
 #+HUGO_WEIGHT: auto
 
+* Goal: Export backend for CV
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: goal
+  :END:
 This project aims to generate from an org-mode file with reasonably ordered
 items a latex file which compiles into a reasonably nice CV. In the same
 spirit the org-mode file must export to markdown so that it can be uses for
@@ -128,7 +132,14 @@ org file.
 When exporting you can call the following function to get the latex file.
 #+BEGIN_SRC emacs-lisp
 (org-export-to-file 'moderncv "moderncv.tex")
+(org-latex-compile "moderncv.tex")
 #+END_SRC
+
+#+BEGIN_EXPORT md
+<object data="/moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="/moderncv.org.pdf">to the PDF!</a></p>
+</object>
+#+END_EXPORT
 ** Using alta-cv
 [[https://github.com/liantze/AltaCV][AltaCV]] is another project to generate a CV, you will need to install it
 yourself. I maintain a fork too at https://github.com/Titan-C/AltaCV.git
@@ -139,7 +150,7 @@ The style of this CV is more involved and you need some configuration in
 your org file to get it to work. First define the margins, the large margin
 to the right is to allow for a second column.
 #+BEGIN_SRC org :tangle altacv.org
-,#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
+,#+LATEX_HEADER: \geometry{left=1cm,right=9cm,marginparwidth=7cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
 #+END_SRC
 # Next block is to generate exports
 #+BEGIN_SRC org :exports none :tangle altacv.org
@@ -156,7 +167,7 @@ need to enclose it in the =\marginpar{}= command as shown next.
 - Free food
 - Free beer
 
-,* Programming Languages
+,* Programming
 - Python
 - C/C++
 - EmacsLisp
@@ -185,13 +196,27 @@ need to enclose it in the =\marginpar{}= command as shown next.
 
 When exporting you can call the following function to get the latex file.
 #+BEGIN_SRC emacs-lisp
-(org-export-to-file 'moderncv "moderncv.tex")
+(org-export-to-file 'altacv "altacv.tex")
+(org-latex-compile "altacv.tex")
 #+END_SRC
 
+#+BEGIN_EXPORT md
+<object data="/altacv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="/altacv.org.pdf">to the PDF!</a></p>
+</object>
+#+END_EXPORT
+
+
+* Docker container
 * Update readme
-** TODO examples [0/2]
-*** TODO pictures
-*** TODO scripts
+** TODO examples [2/2]
+*** DONE pictures
+- State "DONE"       from "TODO"       [2018-05-01 Tue 20:41]
+The website generates the output pdfs, and the orgmode logo is just taken
+from wikipedia commons by link.
+*** DONE scripts
+- State "DONE"       from "TODO"       [2018-05-01 Tue 20:40]
+Now I can completely build a website from this readme and get the targeted CVs.
 * TODO Make a package
 Complete the file with license and how to load it.
 * DONE Base environment

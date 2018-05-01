@@ -26,7 +26,12 @@ When exporting you can call the following function to get the latex file.
 
 ```emacs-lisp
 (org-export-to-file 'moderncv "moderncv.tex")
+(org-latex-compile "moderncv.tex")
 ```
+
+<object data="/moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="/moderncv.org.pdf">to the PDF!</a></p>
+</object>
 
 
 ## Using alta-cv {#using-alta-cv}
@@ -57,7 +62,7 @@ need to enclose it in the `\marginpar{}` command as shown next.
 - Free food
 - Free beer
 
-* Programming Languages
+* Programming
 - Python
 - C/C++
 - EmacsLisp
@@ -80,5 +85,10 @@ need to enclose it in the `\marginpar{}` command as shown next.
 When exporting you can call the following function to get the latex file.
 
 ```emacs-lisp
-(org-export-to-file 'moderncv "moderncv.tex")
+(org-export-to-file 'altacv "altacv.tex")
+(org-latex-compile "altacv.tex")
 ```
+
+<object data="/altacv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="/altacv.org.pdf">to the PDF!</a></p>
+</object>
