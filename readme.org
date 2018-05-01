@@ -138,8 +138,8 @@ When exporting you can call the following function to get the latex file.
 #+END_SRC
 
 #+BEGIN_EXPORT md
-<object data="/moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
-<p>Alternative text - include a link <a href="/moderncv.org.pdf">to the PDF!</a></p>
+<object data="moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="moderncv.org.pdf">to the PDF!</a></p>
 </object>
 #+END_EXPORT
 ** Using alta-cv
@@ -203,8 +203,8 @@ When exporting you can call the following function to get the latex file.
 #+END_SRC
 
 #+BEGIN_EXPORT md
-<object data="/altacv.org.pdf" type="application/pdf" width="100%" height="500px">
-<p>Alternative text - include a link <a href="/altacv.org.pdf">to the PDF!</a></p>
+<object data="altacv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="altacv.org.pdf">to the PDF!</a></p>
 </object>
 #+END_EXPORT
 

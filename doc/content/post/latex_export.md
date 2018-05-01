@@ -29,8 +29,8 @@ When exporting you can call the following function to get the latex file.
 (org-latex-compile "moderncv.tex")
 ```
 
-<object data="/moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
-<p>Alternative text - include a link <a href="/moderncv.org.pdf">to the PDF!</a></p>
+<object data="moderncv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="moderncv.org.pdf">to the PDF!</a></p>
 </object>
 
 
@@ -89,6 +89,6 @@ When exporting you can call the following function to get the latex file.
 (org-latex-compile "altacv.tex")
 ```
 
-<object data="/altacv.org.pdf" type="application/pdf" width="100%" height="500px">
-<p>Alternative text - include a link <a href="/altacv.org.pdf">to the PDF!</a></p>
+<object data="altacv.org.pdf" type="application/pdf" width="100%" height="500px">
+<p>Alternative text - include a link <a href="altacv.org.pdf">to the PDF!</a></p>
 </object>
