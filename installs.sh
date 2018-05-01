@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
+apt-get update && apt install -y fonts-font-awesome
 wget https://github.com/gohugoio/hugo/releases/download/v0.39/hugo_0.39_Linux-64bit.deb
 dpkg -i hugo*.deb
+
+echo "Installed Hugo:"
 hugo version
 
 # Latex
-apt-get update && apt install -y fonts-font-awesome
-git clone https://github.com/Titan-C/AltaCV.git /root/texmf-dist/tex/latex/AltaCV
-wget http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesome.sty
-wget http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesomesymbols-generic.tex
-wget http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesomesymbols-pdftex.tex
+echo "Install altacv"
+git clone https://github.com/Titan-C/AltaCV.git /root/texmf/tex/latex/AltaCV
+echo "Install fontawesome for latex"
+fontdir = /root/texmf/tex/latex/fontawesome/
+mkdir -p $fontdir
 
-emacs --batch --load /tmp/install-org.el
-cd org-cv-exports; latex -pdf altacv.org.tex
+wget -P $fontdir http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesome.sty
+wget -P $fontdir http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesomesymbols-generic.tex
+wget -P $fontdir http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesomesymbols-pdftex.tex
