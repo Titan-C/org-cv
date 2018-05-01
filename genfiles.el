@@ -25,7 +25,7 @@
     (find-file workfile)
     (org-mode)
     (org-export-to-file backend outfile)
-    (shell-command (format "pdflatex %s" outfile))
+    (shell-command (format "pdflatex %s" outfile) "*Messages*" "*Messages*")
     (copy-file (concat file ".pdf") cwd)
     ))
 

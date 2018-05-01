@@ -8,12 +8,15 @@ echo "Installed Hugo:"
 hugo version
 
 # Latex
+latexdir=/root/texmf/tex/latex
 echo "Install altacv"
-git clone https://github.com/Titan-C/AltaCV.git /root/texmf/tex/latex/AltaCV
+wget https://github.com/Titan-C/AltaCV/archive/sections.zip
+unzip -j sections.zip -d $latexdir/AltaCV
 echo "Install moderncv"
-git clone https://github.com/Titan-C/moderncv.git /root/texmf/tex/latex/moderncv
+wget https://github.com/Titan-C/moderncv/archive/master.zip
+unzip -j master.zip -d $latexdir/moderncv
 echo "Install fontawesome for latex"
-fontdir=/root/texmf/tex/latex/fontawesome/
+fontdir=$latexdir/fontawesome/
 mkdir -p $fontdir
 
 wget -P $fontdir http://mirrors.ctan.org/fonts/fontawesome/tex/fontawesome.sty
