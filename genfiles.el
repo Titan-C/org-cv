@@ -26,8 +26,9 @@
     (org-mode)
     (org-export-to-file backend outfile)
     (shell-command (format "pdflatex %s" outfile) "*Messages*" "*Messages*")
-    (copy-file (concat file ".pdf") (concat cwd "/doc/static"))
+    (copy-file (concat file ".pdf") (concat cwd "/doc/static/" (concat file ".pdf")))
     ))
 
+(make-directory (concat cwd "/doc/static/") t)
 (export-latex 'altacv "altacv.org")
 (export-latex 'moderncv "moderncv.org")
