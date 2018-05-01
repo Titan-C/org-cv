@@ -1,8 +1,13 @@
 image: najeraoscar/latex-emacs-min
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - ./installs.sh
+
 test:
   script:
-  - ./installs.sh
   - emacs --batch -Q --script genfiles.el
   - cd doc; hugo
   except:
@@ -11,3 +16,14 @@ test:
   artifacts:
     paths:
       - doc/public
+
+pages:
+  script:
+  - emacs --batch -Q --script genfiles.el
+  - cd doc; hugo
+  - mv doc/public/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+  - master
