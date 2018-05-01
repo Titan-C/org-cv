@@ -28,6 +28,7 @@ foreseen job.
 ```org
 #+TITLE: My dream job
 #+AUTHOR: John Doe
+#+email: john@doe.lost
 
 #+ADDRESS: My Awesome crib
 #+ADDRESS: Fantastic city -- Planet Earth
