@@ -21,6 +21,8 @@ pages:
   script:
   - emacs --batch -Q --script genfiles.el
   - cd doc; hugo
+  - pwd
+  - ls -lah
   - mv doc/public/ public/
   artifacts:
     paths:
