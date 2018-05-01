@@ -10,6 +10,8 @@ hugo version
 # Latex
 echo "Install altacv"
 git clone https://github.com/Titan-C/AltaCV.git /root/texmf/tex/latex/AltaCV
+echo "Install moderncv"
+git clone https://github.com/Titan-C/moderncv.git /root/texmf/tex/latex/moderncv
 echo "Install fontawesome for latex"
 fontdir=/root/texmf/tex/latex/fontawesome/
 mkdir -p $fontdir
