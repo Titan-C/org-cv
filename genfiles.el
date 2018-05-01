@@ -18,17 +18,17 @@
 
 (copy-file (concat cwd "doc/smile.png") workdir)
 
-(defun export-latex (file)
+(defun export-latex (backend file)
   (let ((workfile (concat workdir file))
         (outfile (concat workdir file ".tex")))
     (message (format "%s exists: %s" workfile (file-exists-p workfile)))
     (find-file workfile)
     (org-mode)
-    (org-export-to-file 'altacv outfile)
+    (org-export-to-file backend outfile)
     (shell-command (format "pdflatex %s" outfile))
     (copy-file (concat file ".pdf") cwd)
     ))
 
-(export-latex "altacv.org")
-(export-latex "moderncv.org")
+(export-latex 'altacv "altacv.org")
+(export-latex 'moderncv "moderncv.org")
 (copy-directory workdir cwd)
