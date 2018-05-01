@@ -8,6 +8,7 @@ hugo version
 
 # Latex
 latexdir=/root/texmf/tex/latex
+mkdir -p $latexdir
 echo "Install altacv"
 wget https://github.com/Titan-C/AltaCV/archive/sections.zip
 unzip -j sections.zip -d $latexdir/AltaCV
