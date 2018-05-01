@@ -25,8 +25,10 @@
     (find-file workfile)
     (org-mode)
     (org-export-to-file 'altacv outfile)
-    (shell-command (format "latexmk -pdf %s" outfile))
+    (shell-command (format "pdflatex %s" outfile))
+    (copy-file (concat file ".pdf") cwd)
     ))
 
 (export-latex "altacv.org")
+(export-latex "moderncv.org")
 (copy-directory workdir cwd)
