@@ -211,6 +211,23 @@ When exporting you can call the following function to get the latex file.
 </object>
 #+END_EXPORT
 
+* Markdown Hugo Exporter
+  :PROPERTIES:
+  :EXPORT_FILE_NAME: hugo_export
+  :END:
+If your target is not a PDF file but a website, this exporter extends the
+[[https://ox-hugo.scripter.co/][ox-hugo]] exporter backend. So be sure to install that too.
+
+To export, there is nothing fancy to keep track of, but as an example I
+exclude some tags during export.
+
+#+BEGIN_SRC emacs-lisp
+(let ((org-export-exclude-tags '("noexport" "latexonly")))
+     (org-export-to-file 'hugocv "hugocv.md"))
+#+END_SRC
+
+You are responsible for styling your website.
+
 
 * Local Variables                                                   :ARCHIVE:
 # Local Variables:

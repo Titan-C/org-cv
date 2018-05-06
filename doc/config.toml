@@ -1,10 +1,10 @@
 baseURL = "https://titan-c.gitlab.io/org-cv/"
 languageCode = "en-us"
-title = "Org CV backend export"
+title = "Org CV"
 theme = "project-landing-page"
 
 [params]
-    description = "Org-mode backend exporters for CV"
+    description = "Org-mode backend exporters for Curriculum Vita"
     author_url = "http://blog.oscarnajera.com"
     author = "Titan-C"
     project_url = "https://gitlab.com/Titan-C/org-cv/"
