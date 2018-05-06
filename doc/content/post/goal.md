@@ -11,3 +11,5 @@ spirit the org-mode file must export to markdown so that it can be uses for
 web based CV.
 
 -   Online documentation in <https://titan-c.gitlab.io/org-cv/>
+-   Development happens in the gitlab repository: <https://gitlab.com/Titan-C/org-cv>
+-   There is a mirror in github for backup: <https://github.com/Titan-C/org-cv>
