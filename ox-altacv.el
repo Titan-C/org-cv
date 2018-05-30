@@ -204,14 +204,15 @@ as a communication channel."
         (to-date (org-element-property :TO headline))
         (title (org-export-data (org-element-property :title headline) info))
         (employer (org-element-property :EMPLOYER headline))
-        (location (or (org-element-property :LOCATION headline) "")))
-    (format "\n\\cvevent{%s}{%s}{%s}{%s}%s\n\\divider"
+        (location (or (org-element-property :LOCATION headline) ""))
+        (divider (if (org-export-last-sibling-p headline info) "" "\\divider")))
+    (format "\n\\cvevent{%s}{%s}{%s}{%s}%s\n%s"
             title
             employer
             (concat (org-altacv-timestamp-to-shortdate from-date)
                     " -- "
                     (org-altacv-timestamp-to-shortdate to-date))
-            location contents)))
+            location contents divider)))
 
 
 ;;;; Headline
