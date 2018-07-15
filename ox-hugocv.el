@@ -78,9 +78,9 @@ as a communication channel."
     (format "\n<div class=\"cventry\">
     <h3>%s</h3>
     <ul>
-        <li class=\"fa fa-building\"> %s</li>
-        <li class=\"fa fa-map-marker\"> %s</li>
-        <li class=\"fa fa-calendar\"> %s</li>
+        <li class=\"fas fa-building\"> %s</li>
+        <li class=\"fas fa-map-marker-alt\"> %s</li>
+        <li class=\"far fa-calendar\"> %s</li>
     <ul>
 </div>
 
@@ -117,10 +117,10 @@ holding export options."
             ;; email
             (let ((email (and (plist-get info :with-email)
                               (org-export-data (plist-get info :email) info))))
-                 (when email (format "<li class=\"fa fa-envelope\"><a href=\"mailto:%s\"> %s</a></li>\n" email email)))
+                 (when email (format "<a href=\"mailto:%s\"><li class=\"far fa-envelope\"></li> %s</a>\n" email email)))
             ;; homepage
             (let ((homepage (org-export-data (plist-get info :homepage) info)))
-                 (when homepage (format "<li class=\"fa fa-globe\"><a href=\"https://%s\"> %s</a></li>\n" homepage homepage)))
+                 (when homepage (format "<a href=\"https://%s\"><li class=\"fas fa-globe\"></li> %s</a>\n" homepage homepage)))
             ;; social media
             (mapconcat (lambda (social-network)
 
@@ -129,10 +129,10 @@ holding export options."
 
                                                          info)))
 
-                           (and command (format "<li class=\"fa fa-%s\"><a href=\"https://%s/%s\"> %s</a></li>\n"
-                                                (nth 1 social-network)
+                           (and command (format "<a href=\"https://%s/%s\"><li class=\"fab fa-%s\"></li> %s</a>\n"
                                                 (nth 2 social-network)
                                                 command
+                                                (nth 1 social-network)
                                                 command))))
 
                         '((:github "github" "www.github.com")

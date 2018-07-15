@@ -16,4 +16,5 @@ exclude some tags during export.
      (org-export-to-file 'hugocv "hugocv.md"))
 ```
 
-You are responsible for styling your website.
+You are responsible for styling your website. Icons used here use
+FontAwesome 5.

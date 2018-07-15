@@ -228,7 +228,8 @@ exclude some tags during export.
      (org-export-to-file 'hugocv "hugocv.md"))
 #+END_SRC
 
-You are responsible for styling your website.
+You are responsible for styling your website. Icons used here use
+FontAwesome 5.
 
 
 * Local Variables                                                   :ARCHIVE:
