@@ -54,7 +54,7 @@
   :options-alist
   '((:latex-class "LATEX_CLASS" nil "moderncv" t)
     (:cvstyle "CVSTYLE" nil "classic" t)
-    (:cvcolor "CVCOLOR" nil "blue" t)
+    (:cvcolor "CVCOLOR" nil nil t)
     (:mobile "MOBILE" nil nil parse)
     (:homepage "HOMEPAGE" nil nil parse)
     (:address "ADDRESS" nil nil newline)
@@ -92,7 +92,7 @@ holding export options."
        (when cvstyle (format "\\moderncvstyle{%s}\n" cvstyle)))
      ;; cvcolor
      (let ((cvcolor (org-export-data (plist-get info :cvcolor) info)))
-       (when cvcolor (format "\\moderncvcolor{%s}\n" cvcolor)))
+       (when (not (string-empty-p cvcolor)) (format "\\moderncvcolor{%s}\n" cvcolor)))
      ;; Possibly limit depth for headline numbering.
      (let ((sec-num (plist-get info :section-numbers)))
        (when (integerp sec-num)
