@@ -204,18 +204,20 @@ e.g. <2002-08-12 Mon> => Aug 2012"
   "Format HEADLINE as as cventry.
 CONTENTS holds the contents of the headline.  INFO is a plist used
 as a communication channel."
-  (let ((from-date (org-element-property :FROM headline))
-        (to-date (org-element-property :TO headline))
-        (title (org-export-data (org-element-property :title headline) info))
-        (employer (org-element-property :EMPLOYER headline))
-        (location (or (org-element-property :LOCATION headline) ""))
-        (divider (if (org-export-last-sibling-p headline info) "" "\\divider")))
+  (let* ((title (org-export-data (org-element-property :title headline) info))
+         (from-date (or (org-element-property :FROM headline) (error "No FROM property provided for cventry %s" title)))
+         (to-date (org-element-property :TO headline))
+         (employer (org-element-property :EMPLOYER headline))
+         (location (or (org-element-property :LOCATION headline) ""))
+         (divider (if (org-export-last-sibling-p headline info) "" "\\divider")))
     (format "\n\\cvevent{%s}{%s}{%s}{%s}%s\n%s"
             title
             employer
             (concat (org-altacv-timestamp-to-shortdate from-date)
                     " -- "
-                    (org-altacv-timestamp-to-shortdate to-date))
+                    (if (not to-date)
+                        "Present"
+                      (org-moderncv-timestamp-to-shortdate to-date)))
             location contents divider)))
 
 

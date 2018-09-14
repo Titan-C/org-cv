@@ -70,13 +70,13 @@ e.g. <2002-08-12 Mon> => Aug 2012"
   "Format HEADLINE as as cventry.
 CONTENTS holds the contents of the headline.  INFO is a plist used
 as a communication channel."
-  (let ((from-date (org-element-property :FROM headline))
-        (to-date (org-element-property :TO headline))
-        (loffset (string-to-number (plist-get info :hugo-level-offset))) ;"" -> 0, "0" -> 0, "1" -> 1, ..
-        (level (org-export-get-relative-level headline info))
-        (title (org-export-data (org-element-property :title headline) info))
-        (employer (org-element-property :EMPLOYER headline))
-        (location (or (org-element-property :LOCATION headline) "")))
+  (let* ((title (org-export-data (org-element-property :title headline) info))
+         (from-date (or (org-element-property :FROM headline) (error "No FROM property provided for cventry %s" title)))
+         (to-date (org-element-property :TO headline))
+         (loffset (string-to-number (plist-get info :hugo-level-offset))) ;"" -> 0, "0" -> 0, "1" -> 1, ..
+         (level (org-export-get-relative-level headline info))
+         (employer (org-element-property :EMPLOYER headline))
+         (location (or (org-element-property :LOCATION headline) "")))
     (format "\n%s
 
 <ul class=\"cventry\">
@@ -92,7 +92,9 @@ as a communication channel."
             location
             (concat (org-hugocv-timestamp-to-shortdate from-date)
                     " -- "
-                    (org-hugocv-timestamp-to-shortdate to-date))
+                    (if (not to-date)
+                        "Present"
+                      (org-moderncv-timestamp-to-shortdate to-date)))
             contents)))
 
 
