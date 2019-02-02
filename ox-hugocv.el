@@ -72,21 +72,22 @@ CONTENTS holds the contents of the headline.  INFO is a plist used
 as a communication channel."
   (let ((from-date (org-element-property :FROM headline))
         (to-date (org-element-property :TO headline))
+        (loffset (string-to-number (plist-get info :hugo-level-offset))) ;"" -> 0, "0" -> 0, "1" -> 1, ..
+        (level (org-export-get-relative-level headline info))
         (title (org-export-data (org-element-property :title headline) info))
         (employer (org-element-property :EMPLOYER headline))
         (location (or (org-element-property :LOCATION headline) "")))
-    (format "\n<div class=\"cventry\">
-    <h3>%s</h3>
-    <ul>
-        <li class=\"fa fa-building\"> %s</li>
-        <li class=\"fa fa-map-marker\"> %s</li>
-        <li class=\"fa fa-calendar\"> %s</li>
-    <ul>
-</div>
+    (format "\n%s
+
+<ul class=\"cventry\">
+    <li class=\"fa fa-building\"> %s</li>
+    <li class=\"fa fa-map-marker\"> %s</li>
+    <li class=\"fa fa-calendar\"> %s</li>
+</ul>
 
 %s
 "
-            title
+            (concat (make-string (+ loffset level) ?#) " " title)
             employer
             location
             (concat (org-hugocv-timestamp-to-shortdate from-date)
