@@ -36,7 +36,7 @@
 (unless (assoc "moderncv" org-latex-classes)
   (add-to-list 'org-latex-classes
                '("moderncv"
-                 "\\documentclass{moderncv}\n[NO-DEFAULT-PACKAGES]"
+                 "\\documentclass{moderncv}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
