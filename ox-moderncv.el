@@ -34,11 +34,11 @@
 ;; Install a default set-up for moderncv export.
 (unless (assoc "moderncv" org-latex-classes)
   (add-to-list 'org-latex-classes
-	       '("moderncv"
-		 "\\documentclass{moderncv}"
-		 ("\\section{%s}" . "\\section*{%s}")
-		 ("\\subsection{%s}" . "\\subsection*{%s}")
-		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+               '("moderncv"
+                 "\\documentclass{moderncv}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
 
 
 ;;; User-Configurable Variables
@@ -65,7 +65,7 @@
     (:with-email nil "email" t t)
     )
   :translate-alist '((template . org-moderncv-template)
-		     (headline . org-moderncv-headline)))
+                     (headline . org-moderncv-headline)))
 
 
 ;;;; Template
@@ -78,11 +78,11 @@
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
   (let ((title (org-export-data (plist-get info :title) info))
-	(spec (org-latex--format-spec info)))
+        (spec (org-latex--format-spec info)))
     (concat
      ;; Time-stamp.
      (and (plist-get info :time-stamp-file)
-	  (format-time-string "%% Created %Y-%m-%d %a %H:%M\n"))
+          (format-time-string "%% Created %Y-%m-%d %a %H:%M\n"))
      ;; LaTeX compiler.
      (org-latex--insert-compiler info)
      ;; Document class and packages.
@@ -96,18 +96,18 @@ holding export options."
      ;; Possibly limit depth for headline numbering.
      (let ((sec-num (plist-get info :section-numbers)))
        (when (integerp sec-num)
-	 (format "\\setcounter{secnumdepth}{%d}\n" sec-num)))
+         (format "\\setcounter{secnumdepth}{%d}\n" sec-num)))
      ;; Author.
      (let ((author (and (plist-get info :with-author)
-			(let ((auth (plist-get info :author)))
-			  (and auth (org-export-data auth info))))))
+                        (let ((auth (plist-get info :author)))
+                          (and auth (org-export-data auth info))))))
        (format "\\name{%s}{}\n" author))
      ;; photo
      (let ((photo (org-export-data (plist-get info :photo) info)))
        (when (org-string-nw-p photo) (format "\\photo{%s}\n" photo)))
      ;; email
      (let ((email (and (plist-get info :with-email)
-		       (org-export-data (plist-get info :email) info))))
+                       (org-export-data (plist-get info :email) info))))
        (when email (format "\\email{%s}\n" email)))
      ;; phone
      (let ((mobile (org-export-data (plist-get info :mobile) info)))
@@ -120,16 +120,16 @@ holding export options."
        (when address (format "\\address%s\n" (mapconcat (lambda (line) (format "{%s}" line))
                                                         (split-string address "\n") ""))))
      (mapconcat (lambda (social-network)
-		  (let ((command (org-export-data (plist-get info
-							     (car social-network))
-						  info)))
-		    (and command (format "\\social[%s]{%s}\n"
-					 (nth 1 social-network)
-					 command))))
-		'((:github "github")
-		  (:gitlab "gitlab")
-	          (:linkedin "linkedin"))
-		"")
+                  (let ((command (org-export-data (plist-get info
+                                                             (car social-network))
+                                                  info)))
+                    (and command (format "\\social[%s]{%s}\n"
+                                         (nth 1 social-network)
+                                         command))))
+                '((:github "github")
+                  (:gitlab "gitlab")
+                  (:linkedin "linkedin"))
+                "")
 
      ;; Date.
      (let ((date (and (plist-get info :with-date) (org-export-get-date info))))
@@ -137,16 +137,16 @@ holding export options."
 
      ;; Title and subtitle.
      (let* ((subtitle (plist-get info :subtitle))
-	    (formatted-subtitle
-	     (when subtitle
-	       (format (plist-get info :latex-subtitle-format)
-		       (org-export-data subtitle info))))
-	    (separate (plist-get info :latex-subtitle-separate)))
+            (formatted-subtitle
+             (when subtitle
+               (format (plist-get info :latex-subtitle-format)
+                       (org-export-data subtitle info))))
+            (separate (plist-get info :latex-subtitle-separate)))
        (concat
-	(format "\\title{%s%s}\n" title
-		(if separate "" (or formatted-subtitle "")))
-	(when (and separate subtitle)
-	  (concat formatted-subtitle "\n"))))
+        (format "\\title{%s%s}\n" title
+                (if separate "" (or formatted-subtitle "")))
+        (when (and separate subtitle)
+          (concat formatted-subtitle "\n"))))
      ;; Hyperref options.
      (let ((template (plist-get info :latex-hyperref-template)))
        (and (stringp template)
@@ -158,17 +158,17 @@ holding export options."
             (command (and (stringp title-command)
                           (format-spec title-command spec))))
        (org-element-normalize-string
-	(cond ((not (plist-get info :with-title)) nil)
-	      ((string= "" title) nil)
-	      ((not (stringp command)) nil)
-	      ((string-match "\\(?:[^%]\\|^\\)%s" command)
-	       (format command title))
-	      (t command))))
+        (cond ((not (plist-get info :with-title)) nil)
+              ((string= "" title) nil)
+              ((not (stringp command)) nil)
+              ((string-match "\\(?:[^%]\\|^\\)%s" command)
+               (format command title))
+              (t command))))
      ;; Document's body.
      contents
      ;; Creator.
      (and (plist-get info :with-creator)
-	  (concat (plist-get info :creator) "\n"))
+          (concat (plist-get info :creator) "\n"))
      ;; Document end.
      "\\end{document}")))
 
@@ -178,11 +178,11 @@ holding export options."
 
 e.g. <2002-08-12 Mon> => Aug 2012"
   (let* ((abbreviate 't)
-	 (dte (org-parse-time-string date_str))
-	 (month (nth 4 dte))
-	 (year (nth 5 dte)));;'(02 07 2015)))
+         (dte (org-parse-time-string date_str))
+         (month (nth 4 dte))
+         (year (nth 5 dte)));;'(02 07 2015)))
     (concat (calendar-month-name month abbreviate)
-	    " "
+            " "
 (number-to-string year))))
 
 (defun org-moderncv--format-cventry (headline contents info)
@@ -209,7 +209,7 @@ CONTENTS is the contents of the headline.  INFO is a plist used
 as a communication channel."
   (unless (org-element-property :footnote-section-p headline)
     (let ((environment (let ((env (org-element-property :CV_ENV headline)))
-			 (or (org-string-nw-p env) "block"))))
+                         (or (org-string-nw-p env) "block"))))
       (cond
        ;; is a cv entry
        ((equal environment "cventry")

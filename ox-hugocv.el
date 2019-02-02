@@ -59,11 +59,11 @@
 
 e.g. <2002-08-12 Mon> => Aug 2012"
   (let* ((abbreviate 't)
-	 (dte (org-parse-time-string date_str))
-	 (month (nth 4 dte))
-	 (year (nth 5 dte)));;'(02 07 2015)))
+         (dte (org-parse-time-string date_str))
+         (month (nth 4 dte))
+         (year (nth 5 dte)));;'(02 07 2015)))
     (concat (calendar-month-name month abbreviate)
-	    " "
+            " "
 (number-to-string year))))
 
 (defun org-hugocv--format-cventry (headline contents info)
@@ -103,7 +103,7 @@ CONTENTS is the contents of the headline.  INFO is a plist used
 as a communication channel."
   (unless (org-element-property :footnote-section-p headline)
     (let ((environment (let ((env (org-element-property :CV_ENV headline)))
-			 (or (org-string-nw-p env) "block"))))
+                         (or (org-string-nw-p env) "block"))))
       (cond
        ;; is a cv entry
        ((equal environment "cventry")
