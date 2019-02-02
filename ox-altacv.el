@@ -139,19 +139,23 @@ holding export options."
      "\\personalinfo{\n"
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
-       (when (org-string-nw-p address) (format "\\mailaddress{%s}\n"
-                                               (mapconcat (lambda (line) (format "%s" line))
-                                                        (split-string address "\n") " -- "))))
+       (when (org-string-nw-p address)
+         (format "\\mailaddress{%s}\n" (mapconcat (lambda (line)
+                                                    (format "%s" line))
+                                                  (split-string address "\n") " -- "))))
      ;; email
      (let ((email (and (plist-get info :with-email)
                        (org-export-data (plist-get info :email) info))))
-       (when email (format "\\email{%s}\n" email)))
+       (when (org-string-nw-p email)
+         (format "\\email{%s}\n" email)))
      ;; phone
      (let ((mobile (org-export-data (plist-get info :mobile) info)))
-       (when mobile (format "\\phone{%s}\n" mobile)))
+       (when (org-string-nw-p mobile)
+         (format "\\phone{%s}\n" mobile)))
      ;; homepage
      (let ((homepage (org-export-data (plist-get info :homepage) info)))
-       (when homepage (format "\\homepage{%s}\n" homepage)))
+       (when (org-string-nw-p homepage)
+         (format "\\homepage{%s}\n" homepage)))
      (mapconcat (lambda (social-network)
                   (let ((command (org-export-data (plist-get info
                                                              (car social-network))

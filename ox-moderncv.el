@@ -104,28 +104,33 @@ holding export options."
        (format "\\name{%s}{}\n" author))
      ;; photo
      (let ((photo (org-export-data (plist-get info :photo) info)))
-       (when (org-string-nw-p photo) (format "\\photo{%s}\n" photo)))
+       (when (org-string-nw-p photo)
+         (format "\\photo{%s}\n" photo)))
      ;; email
      (let ((email (and (plist-get info :with-email)
                        (org-export-data (plist-get info :email) info))))
-       (when email (format "\\email{%s}\n" email)))
+       (when (org-string-nw-p email)
+         (format "\\email{%s}\n" email)))
      ;; phone
      (let ((mobile (org-export-data (plist-get info :mobile) info)))
-       (when mobile (format "\\phone[mobile]{%s}\n" mobile)))
+       (when (org-string-nw-p mobile)
+         (format "\\phone[mobile]{%s}\n" mobile)))
      ;; homepage
      (let ((homepage (org-export-data (plist-get info :homepage) info)))
-       (when homepage (format "\\homepage{%s}\n" homepage)))
+       (when (org-string-nw-p homepage)
+         (format "\\homepage{%s}\n" homepage)))
      ;; address
      (let ((address (org-export-data (plist-get info :address) info)))
-       (when address (format "\\address%s\n" (mapconcat (lambda (line) (format "{%s}" line))
-                                                        (split-string address "\n") ""))))
+       (when (org-string-nw-p address)
+         (format "\\address%s\n" (mapconcat (lambda (line)
+                                              (format "{%s}" line))
+                                            (split-string address "\n") ""))))
      (mapconcat (lambda (social-network)
-                  (let ((command (org-export-data (plist-get info
-                                                             (car social-network))
-                                                  info)))
-                    (and command (format "\\social[%s]{%s}\n"
-                                         (nth 1 social-network)
-                                         command))))
+                  (let ((network (org-export-data
+                                  (plist-get info (car social-network)) info)))
+                    (when (org-string-nw-p network)
+                      (format "\\social[%s]{%s}\n"
+                              (nth 1 social-network) network))))
                 '((:github "github")
                   (:gitlab "gitlab")
                   (:linkedin "linkedin"))

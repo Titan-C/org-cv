@@ -118,23 +118,25 @@ holding export options."
             ;; email
             (let ((email (and (plist-get info :with-email)
                               (org-export-data (plist-get info :email) info))))
-                 (when email (format "<li class=\"fa fa-envelope\"><a href=\"mailto:%s\"> %s</a></li>\n" email email)))
+              (when (org-string-nw-p email)
+                (format "<li class=\"fa fa-envelope\"><a href=\"mailto:%s\"> %s</a></li>\n" email email)))
             ;; homepage
             (let ((homepage (org-export-data (plist-get info :homepage) info)))
-                 (when homepage (format "<li class=\"fa fa-globe\"><a href=\"https://%s\"> %s</a></li>\n" homepage homepage)))
+              (when (org-string-nw-p homepage) (format "<li class=\"fa fa-globe\"><a href=\"https://%s\"> %s</a></li>\n" homepage homepage)))
             ;; social media
             (mapconcat (lambda (social-network)
 
-                         (let ((command (org-export-data (plist-get info
-                                                                    (car social-network))
+                         (let ((network (org-export-data
+                                         (plist-get info (car social-network))
 
                                                          info)))
 
-                           (and command (format "<li class=\"fa fa-%s\"><a href=\"https://%s/%s\"> %s</a></li>\n"
+                           (when (org-string-nw-p network)
+                             (format "<li class=\"fa fa-%s\"><a href=\"https://%s/%s\"> %s</a></li>\n"
                                                 (nth 1 social-network)
                                                 (nth 2 social-network)
-                                                command
-                                                command))))
+                                                network
+                                                network))))
 
                         '((:github "github" "www.github.com")
                         (:gitlab "gitlab" "www.gitlab.com")
