@@ -29,6 +29,7 @@
 
 ;;; Code:
 (require 'ox-hugo)
+(require 'org-cv-utils)
 
 ;;; User-Configurable Variables
 
@@ -54,17 +55,6 @@
   :translate-alist '((headline . org-hugocv-headline)
                      (inner-template . org-hugocv-inner-template)))
 
-(defun org-hugocv-timestamp-to-shortdate (date_str)
-  "Format orgmode timestamp DATE_STR  into a short form date.
-
-e.g. <2002-08-12 Mon> => Aug 2012"
-  (let* ((abbreviate 't)
-         (dte (org-parse-time-string date_str))
-         (month (nth 4 dte))
-         (year (nth 5 dte)));;'(02 07 2015)))
-    (concat (calendar-month-name month abbreviate)
-            " "
-(number-to-string year))))
 
 (defun org-hugocv--format-cventry (headline contents info)
   "Format HEADLINE as as cventry.
@@ -90,11 +80,7 @@ as a communication channel."
             (concat (make-string (+ loffset level) ?#) " " title)
             employer
             location
-            (concat (org-hugocv-timestamp-to-shortdate from-date)
-                    " -- "
-                    (if (not to-date)
-                        "Present"
-                      (org-moderncv-timestamp-to-shortdate to-date)))
+            (org-cv-utils--format-time-window from-date to-date)
             contents)))
 
 

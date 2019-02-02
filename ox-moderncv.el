@@ -30,6 +30,7 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'ox-latex)
+(require 'org-cv-utils)
 
 ;; Install a default set-up for moderncv export.
 (unless (assoc "moderncv" org-latex-classes)
@@ -178,18 +179,6 @@ holding export options."
      "\\end{document}")))
 
 
-(defun org-moderncv-timestamp-to-shortdate (date_str)
-  "Format orgmode timestamp DATE_STR  into a short form date.
-
-e.g. <2002-08-12 Mon> => Aug 2012"
-  (let* ((abbreviate 't)
-         (dte (org-parse-time-string date_str))
-         (month (nth 4 dte))
-         (year (nth 5 dte))) ;;'(02 07 2015)))
-    (concat (calendar-month-name month abbreviate)
-            " "
-            (number-to-string year))))
-
 (defun org-moderncv--format-cventry (headline contents info)
   "Format HEADLINE as as cventry.
 CONTENTS holds the contents of the headline.  INFO is a plist used
@@ -201,11 +190,7 @@ as a communication channel."
          (location (or (org-element-property :LOCATION headline) ""))
          (note (or (org-element-property :NOTE headline) "")))
     (format "\\cventry{\\textbf{%s}}{%s}{%s}{%s}{%s}{%s}\n"
-            (concat (org-moderncv-timestamp-to-shortdate from-date)
-                    " -- "
-                    (if (not to-date)
-                        "Present"
-                      (org-moderncv-timestamp-to-shortdate to-date)))
+            (org-cv-utils--format-time-window from-date to-date)
             title employer location note contents)))
 
 
