@@ -180,10 +180,10 @@ e.g. <2002-08-12 Mon> => Aug 2012"
   (let* ((abbreviate 't)
          (dte (org-parse-time-string date_str))
          (month (nth 4 dte))
-         (year (nth 5 dte)));;'(02 07 2015)))
+         (year (nth 5 dte))) ;;'(02 07 2015)))
     (concat (calendar-month-name month abbreviate)
             " "
-(number-to-string year))))
+            (number-to-string year))))
 
 (defun org-moderncv--format-cventry (headline contents info)
   "Format HEADLINE as as cventry.
