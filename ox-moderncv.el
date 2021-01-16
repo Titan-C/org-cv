@@ -193,6 +193,13 @@ as a communication channel."
             (org-cv-utils--format-time-window from-date to-date)
             title employer location note contents)))
 
+(defun org-moderncv--format-cvitem (headline contents info)
+  "Format HEADLINE as as cvitem.
+CONTENTS holds the contents of the headline.  INFO is a plist used
+as a communication channel."
+  (let* ((title (org-export-data (org-element-property :title headline) info)))
+    (format "\\cvitem{%s}{%s}\n"
+            title contents)))
 
 ;;;; Headline
 (defun org-moderncv-headline (headline contents info)
@@ -203,6 +210,9 @@ as a communication channel."
     (let ((environment (let ((env (org-element-property :CV_ENV headline)))
                          (or (org-string-nw-p env) "block"))))
       (cond
+       ;; is a cv item
+       ((equal environment "cvitem")
+        (org-moderncv--format-cvitem headline contents info))
        ;; is a cv entry
        ((equal environment "cventry")
         (org-moderncv--format-cventry headline contents info))
